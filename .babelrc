@@ -1,0 +1,26 @@
+{
+  "presets": [
+    "module:metro-react-native-babel-preset",
+    "module:react-native-dotenv"
+  ],
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "cwd": "babelrc",
+        "root": ["./"],
+        "extensions": [".ios.js", ".android.js", ".js", ".json"],
+        "alias": {
+          "@root": "./",
+          "@app": "./src",
+          "@components": "./src/components",
+          "@services": "./src/services",
+          "@styles": "./src/styles",
+          "@scenes": "./src/scenes",
+          "@images": "./src/assets/images",
+          "@constants": "./src/constants"
+        }
+      }
+    ]
+  ]
+}
