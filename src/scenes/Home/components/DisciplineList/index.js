@@ -28,7 +28,7 @@ const DisciplineList = () => {
       data={disciplines}
       keyExtractor={(item, index) => item + index}
       renderItem={({ item, index }) => (
-        <Item key={index.toString()} value={item} />
+        <Item key={index.toString()} discipline={item} />
       )}
       ListEmptyComponent={<EmptyList label="Nenhuma turma encontrada!" />}
     />

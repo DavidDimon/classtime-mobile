@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { View, StyleSheet, Text, TouchableOpacity } from 'react-native'
+import { withNavigation } from 'react-navigation'
 import { Icon } from 'react-native-elements'
 import { borderShadow, Colors } from '@styles'
 
@@ -28,9 +29,14 @@ const styles = StyleSheet.create({
   },
 })
 
-const Item = ({ value }) => {
+const Item = ({ discipline, navigation }) => {
+  const onNavigate = useCallback(
+    () => navigation.navigate('discipline', discipline),
+    []
+  )
+
   return (
-    <TouchableOpacity style={styles.card}>
+    <TouchableOpacity onPress={onNavigate} style={styles.card}>
       <View style={styles.leftContent}>
         <Icon
           name="google-classroom"
@@ -40,11 +46,11 @@ const Item = ({ value }) => {
         />
       </View>
       <View style={styles.rightContent}>
-        <Text style={styles.discipline}>{value.name}</Text>
-        <Text style={styles.term}>{value.term}</Text>
+        <Text style={styles.discipline}>{discipline.name}</Text>
+        <Text style={styles.term}>{discipline.term}</Text>
       </View>
     </TouchableOpacity>
   )
 }
 
-export default Item
+export default withNavigation(Item)
