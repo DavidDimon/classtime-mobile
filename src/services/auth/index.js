@@ -1,25 +1,30 @@
-import * as R from 'ramda'
+import { encode } from 'base-64'
 import fetch from '@services/fetch'
-import { setItem, removeItem } from '@services/db'
+import { setItem, getItem, removeItem } from '@services/db'
 import { showConfirm } from '@services/alert'
 
-const authenticate = async ({ username, password }) => {
+const getHeaders = user => {
+  return `Basic ${encode(`${user.username}:${user.password}`)}`
+}
+
+export const authenticate = async ({ username, password }) => {
+  const auth = getHeaders({ username, password })
+
   const { data } = await fetch({
-    method: 'post',
     url: `user/login`,
     headers: {
       'Content-Type': 'application/json',
+      Authorization: auth,
     },
-    data: { email: username, password },
   })
-  setItem('account', R.omit(['password'], data.user))
+  setItem('account', data.user)
 }
 
-const onLogout = navigation =>
+export const onLogout = navigation =>
   showConfirm('Logout', 'Você deseja se deslogar do aplicativo?', () => {
     removeItem('account')
     removeItem('services')
     navigation.navigate('authLoading')
   })
 
-export { authenticate, onLogout }
+export const getUser = () => getItem('account')

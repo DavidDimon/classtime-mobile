@@ -13,7 +13,6 @@ const styles = StyleSheet.create({
 const AuthLoading = ({ navigation }) => {
   const onAuth = useCallback(async () => {
     const account = await getItem('account')
-    console.log(account)
     navigation.navigate(account ? 'app' : 'auth')
   }, [])
 

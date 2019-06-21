@@ -1,0 +1,50 @@
+import React from 'react'
+import { View, StyleSheet, Text, TouchableOpacity } from 'react-native'
+import { Icon } from 'react-native-elements'
+import { borderShadow, Colors } from '@styles'
+
+const styles = StyleSheet.create({
+  card: {
+    flex: 1,
+    flexDirection: 'row',
+    backgroundColor: '#fff',
+    height: 70,
+    margin: 10,
+    ...borderShadow,
+  },
+  leftContent: {
+    width: 30,
+    marginLeft: 15,
+    alignSelf: 'center',
+  },
+  rightContent: {
+    padding: 10,
+  },
+  discipline: {
+    fontWeight: 'bold',
+  },
+  term: {
+    color: Colors.silver,
+  },
+})
+
+const Item = ({ value }) => {
+  return (
+    <TouchableOpacity style={styles.card}>
+      <View style={styles.leftContent}>
+        <Icon
+          name="google-classroom"
+          size={25}
+          color={Colors.primary}
+          type="material-community"
+        />
+      </View>
+      <View style={styles.rightContent}>
+        <Text style={styles.discipline}>{value.name}</Text>
+        <Text style={styles.term}>{value.term}</Text>
+      </View>
+    </TouchableOpacity>
+  )
+}
+
+export default Item
