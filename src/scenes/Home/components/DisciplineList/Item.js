@@ -11,6 +11,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     height: 70,
     margin: 10,
+    borderRadius: 10,
     ...borderShadow,
   },
   leftContent: {
@@ -31,7 +32,7 @@ const styles = StyleSheet.create({
 
 const Item = ({ discipline, navigation }) => {
   const onNavigate = useCallback(
-    () => navigation.navigate('discipline', discipline),
+    () => navigation.navigate('discipline', { discipline }),
     []
   )
 

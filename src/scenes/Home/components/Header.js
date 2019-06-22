@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     borderWidth: 1,
     borderColor: Colors.white,
-    borderRadius: 4,
+    borderRadius: 10,
     backgroundColor: Colors.white,
     position: 'absolute',
     alignSelf: 'center',
