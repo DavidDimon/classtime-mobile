@@ -17,6 +17,7 @@ export const Colors = {
   gradientSuccess: ['#74e8a4', '#2ecc71'],
   gradientPrimary: ['#69b0f4', '#3396F5'],
   gradientHeader: ['#4f3a65', '#9974c1'],
+  gradientOrange: ['#ff9966', '#ff5e62'],
 }
 
 export const borderShadow = {

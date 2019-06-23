@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
   },
 })
 
-const MenuButtons = ({ menuSelected, onPress }) => {
+const MenuButtons = ({ menuSelected, onPress, role }) => {
   return (
     <View style={styles.container}>
       <MenuItem
@@ -30,6 +30,16 @@ const MenuButtons = ({ menuSelected, onPress }) => {
         active={menuSelected === 'alerts'}
         onPress={() => onPress('alerts')}
       />
+
+      {role >= 2 && (
+        <MenuItem
+          color={Colors.gradientOrange}
+          label="Turmas"
+          name="book-open-variant"
+          active={menuSelected === 'disciplines'}
+          onPress={() => onPress('disciplines')}
+        />
+      )}
 
       <MenuItem
         color={Colors.gradientSuccess}
