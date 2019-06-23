@@ -1,7 +1,6 @@
 import React from 'react'
 import { FlatList } from 'react-native'
-
-import Item from './Item'
+import { CardAlert } from '@components'
 
 const Alerts = ({ alerts = [] }) => {
   return (
@@ -9,7 +8,7 @@ const Alerts = ({ alerts = [] }) => {
       data={alerts}
       keyExtractor={(item, index) => item + index}
       renderItem={({ item, index }) => (
-        <Item key={index.toString()} item={item} />
+        <CardAlert key={index.toString()} item={item} />
       )}
     />
   )
