@@ -5,12 +5,14 @@ import {
 } from 'react-navigation'
 import transitionConfig from './transitionConfig'
 import { HomeStack } from './Stacks'
-import Login from '@scenes/Login'
+import Login from '@scenes/Auth/Login'
+import Signup from '@scenes/Auth/Signup'
 import AuthLoading from '@scenes/AuthLoading'
 
 const unathenticated = createStackNavigator(
   {
     login: Login,
+    signup: Signup,
   },
   {
     initialRouteName: 'login',

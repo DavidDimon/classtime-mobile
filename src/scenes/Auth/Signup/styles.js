@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native'
+import { Colors } from '@styles'
 
 export const styles = StyleSheet.create({
   container: {
@@ -13,5 +14,12 @@ export const styles = StyleSheet.create({
   button: {
     marginTop: 20,
     alignSelf: 'center',
+  },
+  signup: {
+    alignSelf: 'center',
+    marginTop: 20,
+  },
+  textSignup: {
+    color: Colors.blue,
   },
 })
