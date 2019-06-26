@@ -5,10 +5,11 @@ import { withNavigation } from 'react-navigation'
 import * as R from 'ramda'
 
 import { Content, InputText, Button } from '@components'
-import { Card } from '../components'
+import { Background } from '../components'
 import { styles } from './styles'
 
 import { authenticate } from '@services/auth'
+import { Colors } from '@styles'
 
 const validate = (values, setErrors) => {
   const errors = []
@@ -49,42 +50,40 @@ const Login = ({ values, handleChange, navigation, ...props }) => {
   }, [navigation])
 
   return (
-    <Content>
-      <View style={styles.container}>
-        <Card>
-          <InputText
-            icon="email-outline"
-            label="Email"
-            type="email-address"
-            containerStyle={styles.inputText}
-            onChangeText={handleChange('email')}
-            value={values.email}
-            error={errors.includes('email')}
-          />
+    <Content notchColor="#69b0f4">
+      <Background title="Login">
+        <InputText
+          icon="email-outline"
+          label="Email"
+          type="email-address"
+          containerStyle={styles.inputText}
+          onChangeText={handleChange('email')}
+          value={values.email}
+          error={errors.includes('email')}
+        />
 
-          <InputText
-            icon="lock-outline"
-            label="Senha"
-            containerStyle={styles.inputText}
-            onChangeText={handleChange('password')}
-            value={values.password}
-            error={errors.includes('password')}
-            type="password"
-          />
+        <InputText
+          icon="lock-outline"
+          label="Senha"
+          containerStyle={styles.inputText}
+          onChangeText={handleChange('password')}
+          value={values.password}
+          error={errors.includes('password')}
+          type="password"
+        />
 
-          <Button
-            style={styles.button}
-            title={'Login'}
-            isLoading={loading}
-            onPress={onLogin}
-          />
+        <Button
+          style={styles.button}
+          title={'Login'}
+          isLoading={loading}
+          onPress={onLogin}
+        />
 
-          <TouchableOpacity style={styles.signup} onPress={goToSignup}>
-            <Text style={styles.textSignup}>{'Criar conta'}</Text>
-          </TouchableOpacity>
-        </Card>
+        <TouchableOpacity style={styles.signup} onPress={goToSignup}>
+          <Text style={styles.textSignup}>{'Criar conta'}</Text>
+        </TouchableOpacity>
         {authError && <Text style={styles.error}>{authError}</Text>}
-      </View>
+      </Background>
     </Content>
   )
 }

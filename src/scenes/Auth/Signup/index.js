@@ -5,7 +5,7 @@ import { withNavigation } from 'react-navigation'
 import * as R from 'ramda'
 
 import { Content, InputText, Button } from '@components'
-import { Card } from '../components'
+import { Background } from '../components'
 import { styles } from './styles'
 
 import { signup } from '@services/auth'
@@ -43,59 +43,57 @@ const Signup = ({ values, handleChange, navigation }) => {
   const goToLogin = useCallback(() => navigation.navigate('login'), [])
 
   return (
-    <Content>
-      <View style={styles.container}>
-        <Card style={{ height: '60%' }}>
-          <InputText
-            icon="account"
-            label="Nome"
-            containerStyle={styles.inputText}
-            onChangeText={handleChange('name')}
-            value={values.name}
-            error={errors.includes('name')}
-          />
+    <Content notchColor="#69b0f4">
+      <Background title="Criar conta">
+        <InputText
+          icon="account"
+          label="Nome"
+          containerStyle={styles.inputText}
+          onChangeText={handleChange('name')}
+          value={values.name}
+          error={errors.includes('name')}
+        />
 
-          <InputText
-            icon="email-outline"
-            label="Email"
-            type="email-address"
-            containerStyle={styles.inputText}
-            onChangeText={handleChange('email')}
-            value={values.email}
-            error={errors.includes('email')}
-          />
+        <InputText
+          icon="email-outline"
+          label="Email"
+          type="email-address"
+          containerStyle={styles.inputText}
+          onChangeText={handleChange('email')}
+          value={values.email}
+          error={errors.includes('email')}
+        />
 
-          <InputText
-            icon="file-document-outline"
-            label="Matrícula"
-            containerStyle={styles.inputText}
-            onChangeText={handleChange('studentId')}
-            value={values.studentId}
-            error={errors.includes('studentId')}
-          />
+        <InputText
+          icon="file-document-outline"
+          label="Matrícula"
+          containerStyle={styles.inputText}
+          onChangeText={handleChange('studentId')}
+          value={values.studentId}
+          error={errors.includes('studentId')}
+        />
 
-          <InputText
-            icon="lock-outline"
-            label="Senha"
-            containerStyle={styles.inputText}
-            onChangeText={handleChange('password')}
-            value={values.password}
-            error={errors.includes('password')}
-            type="password"
-          />
+        <InputText
+          icon="lock-outline"
+          label="Senha"
+          containerStyle={styles.inputText}
+          onChangeText={handleChange('password')}
+          value={values.password}
+          error={errors.includes('password')}
+          type="password"
+        />
 
-          <Button
-            style={styles.button}
-            title={'Criar conta'}
-            isLoading={loading}
-            onPress={onSignup}
-          />
+        <Button
+          style={styles.button}
+          title={'Criar conta'}
+          isLoading={loading}
+          onPress={onSignup}
+        />
 
-          <TouchableOpacity style={styles.signup} onPress={goToLogin}>
-            <Text style={styles.textSignup}>{'Voltar para o login'}</Text>
-          </TouchableOpacity>
-        </Card>
-      </View>
+        <TouchableOpacity style={styles.signup} onPress={goToLogin}>
+          <Text style={styles.textSignup}>{'Voltar para o login'}</Text>
+        </TouchableOpacity>
+      </Background>
     </Content>
   )
 }
