@@ -6,8 +6,8 @@ import LinearGradient from 'react-native-linear-gradient'
 const styles = StyleSheet.create({
   container: {
     padding: 10,
-    paddingRight: 20,
-    paddingLeft: 20,
+    paddingRight: 15,
+    paddingLeft: 15,
   },
   touchable: {
     alignSelf: 'center',

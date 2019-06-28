@@ -1,5 +1,5 @@
 import React, { useCallback, useState, useEffect } from 'react'
-import { Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 import { withNavigation } from 'react-navigation'
 import { Content, Header } from '@components'
 import { Colors } from '@styles'
@@ -7,10 +7,14 @@ import { getGrid } from '@services/requests/grid'
 import { DateGrid, Alerts } from './components'
 
 const styles = StyleSheet.create({
-  alertsTitle: {
+  title: {
     fontWeight: 'bold',
     fontSize: 20,
     marginLeft: 20,
+  },
+  classroomView: {
+    marginTop: 10,
+    flexDirection: 'row',
   },
 })
 
@@ -32,13 +36,16 @@ const Discipline = ({ navigation }) => {
       <Header
         title={discipline.name}
         iconRight="comment-plus"
-        onPressRight={() => ''}
-        onPressLeft={() => navigation.navigate('home')}
+        onPressRight={() => navigation.navigate('alertForm', { discipline })}
       />
+
+      <View style={styles.classroomView}>
+        <Text style={styles.title}>{`Sala: ${discipline.classroom}`}</Text>
+      </View>
 
       <DateGrid />
 
-      <Text style={styles.alertsTitle}>{'Alertas'}</Text>
+      <Text style={styles.title}>{'Alertas'}</Text>
       <Alerts alerts={discipline.alerts} />
     </Content>
   )

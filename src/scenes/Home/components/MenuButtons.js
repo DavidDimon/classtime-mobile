@@ -34,10 +34,10 @@ const MenuButtons = ({ menuSelected, onPress, role }) => {
       {role >= 2 && (
         <MenuItem
           color={Colors.gradientOrange}
-          label="Turmas"
-          name="book-open-variant"
-          active={menuSelected === 'disciplines'}
-          onPress={() => onPress('disciplines')}
+          label="Gerencial"
+          name="settings"
+          active={menuSelected === 'settings'}
+          onPress={() => onPress('settings')}
         />
       )}
 

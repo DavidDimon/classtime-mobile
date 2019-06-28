@@ -53,7 +53,9 @@ const Header = ({
         <TouchableOpacity
           style={styles.button}
           onPress={() =>
-            onPressLeft() || navigation.dispatch(NavigationActions.back())
+            onPressLeft
+              ? onPressLeft()
+              : navigation.dispatch(NavigationActions.back())
           }
         >
           <Icon
