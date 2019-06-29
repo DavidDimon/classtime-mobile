@@ -30,7 +30,7 @@ const Settings = ({ navigation }) => {
           size={40}
           color={Colors.white}
         />
-        <Text style={styles.textButton}>{'Criar turmas'}</Text>
+        <Text style={styles.textButton}>{'Criar aulas'}</Text>
       </TouchableOpacity>
     </View>
   )

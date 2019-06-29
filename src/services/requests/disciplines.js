@@ -17,3 +17,15 @@ export const getDisciplines = async params => {
   }
   return { data: [] }
 }
+
+export const saveDiscipline = async data => {
+  const user = await getItem('account')
+  return fetch(
+    {
+      method: 'post',
+      url: `disciplines`,
+      data,
+    },
+    user.token
+  )
+}

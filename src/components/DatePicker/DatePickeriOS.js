@@ -6,8 +6,9 @@ import {
   DatePickerIOS,
   StyleSheet,
 } from 'react-native'
+import { Icon } from 'react-native-elements'
 import moment from 'moment'
-import { Icon, Modal } from '@components'
+import { Modal } from '@components'
 import { Colors } from '@styles'
 
 const formatDates = {
@@ -23,7 +24,16 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
   },
   dateContent: {
+    flex: 1,
     flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingLeft: 5,
+    paddingRight: 5,
+    borderWidth: 1,
+    borderRadius: 2,
+    height: 40,
+    borderColor: Colors.grayLight,
   },
   dateText: {
     color: '#fff',
@@ -34,10 +44,20 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
     borderBottomWidth: 1,
     borderColor: Colors.silver,
-    justifyContent: 'flex-start',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  label: {
+    color: '#777',
+    paddingTop: 10,
+    paddingLeft: 5,
   },
   backButton: {
+    paddingLeft: 5,
     alignSelf: 'center',
+  },
+  headerTitle: {
+    marginRight: 20,
   },
 })
 
@@ -49,11 +69,13 @@ const DatePicker = ({
   style,
   minDate,
   maxDate,
+  label,
 }) => {
   const [open, setOpen] = useState(false)
 
   return (
     <View style={style}>
+      <Text style={styles.label}>{label}</Text>
       <TouchableOpacity
         style={styles.dateContent}
         onPress={() => setOpen(true)}
@@ -63,7 +85,7 @@ const DatePicker = ({
         <Icon
           name="chevron-down"
           type="material-community"
-          size={15}
+          size={20}
           color="#000"
         />
       </TouchableOpacity>
@@ -81,6 +103,8 @@ const DatePicker = ({
                 color="#000"
               />
             </TouchableOpacity>
+            <Text style={styles.headerTitle}>{label}</Text>
+            <View />
           </View>
           <DatePickerIOS
             date={moment(value).toDate()}
