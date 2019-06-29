@@ -2,6 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react'
 import { FlatList, StyleSheet } from 'react-native'
 import moment from 'moment'
 import Item from './Item'
+import { loadDates } from '@services/gridUtils'
 
 const styles = StyleSheet.create({
   content: {
@@ -12,25 +13,13 @@ const styles = StyleSheet.create({
   },
 })
 
-const daysOfWeek = ['Dom', 'Seg', 'Ter', 'Qua', 'Sex', 'Sáb']
-
-const generateArray = length =>
-  [...Array(length).keys()].map((item, index) => {
-    const date = moment(new Date()).add(index * 7, 'days')
-    return {
-      date: date.format('DD/MM'),
-      day: daysOfWeek[date.day() - 1],
-      countAlerts: index === 0 ? 2 : index === 2 ? 1 : 0,
-    }
-  })
-
-const DateGrid = () => {
+const DateGrid = ({ beginAt, endAt, alerts, filter, onChange }) => {
   const [dates, setDates] = useState([])
 
   const loadOnMount = useCallback(() => {
-    const allDates = generateArray(7)
+    const allDates = loadDates(moment(beginAt), moment(endAt), alerts)
     setDates(allDates)
-  }, [])
+  }, [beginAt, endAt])
 
   useEffect(() => {
     loadOnMount()
@@ -38,12 +27,18 @@ const DateGrid = () => {
 
   return (
     <FlatList
+      extraData={filter}
       style={styles.list}
       contentContainerStyle={styles.content}
-      data={dates}
+      data={dates || []}
       keyExtractor={(item, index) => item + index}
       renderItem={({ item, index }) => (
-        <Item key={index.toString()} item={item} index={index} />
+        <Item
+          key={index.toString()}
+          item={item}
+          isSelected={item.date === filter}
+          onChange={() => onChange(item.date)}
+        />
       )}
       horizontal
     />

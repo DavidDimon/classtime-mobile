@@ -9,21 +9,20 @@ const daysOfWeek = [
   'Sábado',
 ]
 
-export const loadDates = (length = 0, minDate, alerts = []) =>
-  length > 0 && minDate instanceof moment
+export const loadDates = (minDate, maxDate, alerts) => {
+  if (!minDate || !maxDate) return []
+  const length = maxDate.diff(minDate, 'week') + 1
+  return length > 0 && minDate instanceof moment
     ? [...Array(length).keys()].map((item, index) => {
         const date = index === 0 ? minDate : minDate.add(7, 'days')
         return {
-          date: date.format('DD/MM'),
+          date: date.format('DD/MM/YYYY'),
           day: daysOfWeek[date.day() - 1],
-          countAlerts: alerts.length,
+          countAlerts:
+            alerts && alerts[date.format('DD/MM/YYYY')]
+              ? alerts[date.format('DD/MM/YYYY')].length
+              : 0,
         }
       })
     : []
-
-export const getNextDate = date => {
-  const parsed = moment(date)
-  const now = moment(date).day() - 7
-  const days = now + moment(date).day()
-  return parsed.add(days, 'days')
 }

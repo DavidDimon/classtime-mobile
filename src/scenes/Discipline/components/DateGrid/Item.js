@@ -1,5 +1,6 @@
 import React from 'react'
 import { TouchableOpacity, StyleSheet, Text, View } from 'react-native'
+import moment from 'moment'
 import { Colors } from '@styles'
 
 const styles = StyleSheet.create({
@@ -38,31 +39,33 @@ const styles = StyleSheet.create({
 const generateArray = (length, value) =>
   [...Array(length).keys()].map(item => value)
 
-const Item = ({ item, index }) => {
+const Item = ({ item, isSelected, onChange }) => {
   const alerts = generateArray(item.countAlerts, '')
   return (
     <TouchableOpacity
       style={[
         styles.card,
         {
-          backgroundColor:
-            index === 0 ? 'rgba(105, 176, 244, 0.8)' : Colors.grayLight,
+          backgroundColor: isSelected
+            ? 'rgba(105, 176, 244, 0.8)'
+            : Colors.grayLight,
         },
       ]}
+      onPress={onChange}
     >
       <Text
         style={[
           styles.date,
           {
-            color: index === 0 ? Colors.textColorReverse : Colors.textColor,
+            color: isSelected ? Colors.textColorReverse : Colors.textColor,
           },
         ]}
       >
-        {item.date}
+        {moment(item.date, 'DD/MM/YYYY').format('DD/MM')}
       </Text>
       <Text
         style={{
-          color: index === 0 ? Colors.textColorReverse : Colors.textColor,
+          color: isSelected ? Colors.textColorReverse : Colors.textColor,
         }}
       >
         {item.day}
