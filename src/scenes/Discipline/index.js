@@ -34,7 +34,7 @@ const Discipline = ({ navigation }) => {
     const param = navigation.getParam('discipline')
     const { data } = await getGrid(param.Grid.ID)
     const alerts = parseAlerts(data.Alerts)
-    setFilter(Object.keys(alerts)[0])
+    setFilter(Object.keys(alerts)[Object.keys(alerts).length - 1])
     setDiscipline({
       ...param,
       beginAt: moment(param.beginAt),
