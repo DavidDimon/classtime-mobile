@@ -69,6 +69,7 @@ const InputText = ({
   placeholder,
   icon,
   typeIcon,
+  textarea,
 }) => {
   const [hidePassword, setHidePassword] = useState(true)
   const widthInput = useMemo(() => getWidthInput(!!icon, type === 'password'), [
@@ -101,7 +102,10 @@ const InputText = ({
         ref={ref => (animatable = ref)}
         style={[
           styles.content,
-          { borderColor: error ? 'red' : Colors.grayLight },
+          {
+            borderColor: error ? 'red' : Colors.grayLight,
+            height: textarea ? 100 : 35,
+          },
         ]}
       >
         {icon && (
@@ -124,6 +128,8 @@ const InputText = ({
           onChangeText={onChangeText}
           secureTextEntry={type === 'password' && hidePassword}
           keyboardType={type !== 'password' ? type : 'default'}
+          multiline={textarea}
+          numberOfLines={textarea ? 4 : 1}
         />
 
         {type === 'password' && (
@@ -147,6 +153,7 @@ const InputText = ({
 InputText.defaultProps = {
   required: false,
   password: false,
+  textarea: false,
   typeIcon: 'material-community',
   type: 'default',
 }

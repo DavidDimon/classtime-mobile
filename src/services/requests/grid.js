@@ -43,3 +43,19 @@ export const getAlertsOfDay = async () => {
   }
   return { data: [] }
 }
+
+export const addAlert = async (id, data) => {
+  const user = await getItem('account')
+
+  return fetch(
+    {
+      method: 'post',
+      url: `grid/${id}/add-alert`,
+      data: {
+        ...data,
+        date: moment(data.date).format('YYYY-MM-DDTHH:mm:ssZ'),
+      },
+    },
+    user.token
+  )
+}

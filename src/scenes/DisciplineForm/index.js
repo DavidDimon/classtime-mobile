@@ -68,6 +68,7 @@ const DisciplineForm = ({ navigation, values, handleChange, ...props }) => {
           onChangeText={handleChange('name')}
           value={values.name}
           error={errors.includes('name')}
+          required
         />
 
         <InputText
@@ -75,6 +76,7 @@ const DisciplineForm = ({ navigation, values, handleChange, ...props }) => {
           onChangeText={handleChange('term')}
           value={values.term}
           error={errors.includes('term')}
+          required
         />
 
         <InputText
@@ -82,6 +84,7 @@ const DisciplineForm = ({ navigation, values, handleChange, ...props }) => {
           onChangeText={handleChange('classroom')}
           value={values.classroom}
           error={errors.includes('classroom')}
+          required
         />
 
         <SelectDays

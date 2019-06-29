@@ -52,6 +52,7 @@ const Signup = ({ values, handleChange, navigation }) => {
           onChangeText={handleChange('name')}
           value={values.name}
           error={errors.includes('name')}
+          required
         />
 
         <InputText
@@ -62,6 +63,7 @@ const Signup = ({ values, handleChange, navigation }) => {
           onChangeText={handleChange('email')}
           value={values.email}
           error={errors.includes('email')}
+          required
         />
 
         <InputText
@@ -71,6 +73,7 @@ const Signup = ({ values, handleChange, navigation }) => {
           onChangeText={handleChange('studentId')}
           value={values.studentId}
           error={errors.includes('studentId')}
+          required
         />
 
         <InputText
@@ -81,6 +84,7 @@ const Signup = ({ values, handleChange, navigation }) => {
           value={values.password}
           error={errors.includes('password')}
           type="password"
+          required
         />
 
         <Button

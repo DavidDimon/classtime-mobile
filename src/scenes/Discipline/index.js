@@ -16,8 +16,11 @@ const Discipline = ({ navigation }) => {
   }, [])
 
   useEffect(() => {
-    loadOnMount()
-  }, [])
+    const param = navigation.getParam('reset')
+    if (param === undefined || param) {
+      loadOnMount()
+    }
+  }, [navigation])
 
   return (
     <Content notchColor={Colors.blue}>
