@@ -1,25 +1,13 @@
 import React, { useCallback, useState, useEffect } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
 import { withNavigation } from 'react-navigation'
-import { Content, Header } from '@components'
+import { Content } from '@components'
 import { Colors } from '@styles'
 import { getGrid } from '@services/requests/grid'
-import { DateGrid, Alerts } from './components'
-
-const styles = StyleSheet.create({
-  title: {
-    fontWeight: 'bold',
-    fontSize: 20,
-    marginLeft: 20,
-  },
-  classroomView: {
-    marginTop: 10,
-    flexDirection: 'row',
-  },
-})
+import { DateGrid, Alerts, Header, Users } from './components'
 
 const Discipline = ({ navigation }) => {
   const [discipline, setDiscipline] = useState({})
+  const [tabSelected, setTabSelected] = useState('alerts')
 
   const loadOnMount = useCallback(async () => {
     const param = navigation.getParam('discipline')
@@ -34,19 +22,19 @@ const Discipline = ({ navigation }) => {
   return (
     <Content notchColor={Colors.blue}>
       <Header
-        title={discipline.name}
-        iconRight="comment-plus"
-        onPressRight={() => navigation.navigate('alertForm', { discipline })}
+        discipline={discipline}
+        tabSelected={tabSelected}
+        onChangeTab={setTabSelected}
       />
 
-      <View style={styles.classroomView}>
-        <Text style={styles.title}>{`Sala: ${discipline.classroom}`}</Text>
-      </View>
+      {tabSelected === 'alerts' && (
+        <React.Fragment>
+          <DateGrid />
+          <Alerts alerts={discipline.alerts} />
+        </React.Fragment>
+      )}
 
-      <DateGrid />
-
-      <Text style={styles.title}>{'Alertas'}</Text>
-      <Alerts alerts={discipline.alerts} />
+      {tabSelected === 'users' && <Users users={discipline.users} />}
     </Content>
   )
 }
