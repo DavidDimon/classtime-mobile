@@ -17,7 +17,8 @@ const styles = StyleSheet.create({
   date: {
     fontWeight: 'bold',
     fontSize: 16,
-    marginBottom: 5,
+    marginBottom: 3,
+    marginTop: 3,
   },
   contentDot: {
     flex: 1,
@@ -39,7 +40,7 @@ const styles = StyleSheet.create({
 const generateArray = (length, value) =>
   [...Array(length).keys()].map(item => value)
 
-const Item = ({ item, isSelected, onChange }) => {
+const Item = ({ item, isSelected, onChange, index }) => {
   const alerts = generateArray(item.countAlerts, '')
   return (
     <TouchableOpacity
@@ -54,6 +55,14 @@ const Item = ({ item, isSelected, onChange }) => {
       onPress={onChange}
     >
       <Text
+        style={{
+          color: isSelected ? Colors.textColorReverse : Colors.textColor,
+          fontSize: 13,
+        }}
+      >
+        {`Aula ${index + 1}`}
+      </Text>
+      <Text
         style={[
           styles.date,
           {
@@ -66,6 +75,7 @@ const Item = ({ item, isSelected, onChange }) => {
       <Text
         style={{
           color: isSelected ? Colors.textColorReverse : Colors.textColor,
+          fontSize: 13,
         }}
       >
         {item.day}

@@ -24,12 +24,24 @@ export const saveDiscipline = async data => {
   return fetch(
     {
       method: 'post',
-      url: `disciplines/create`,
+      url: `discipline/create`,
       data: {
         ...data,
-        beginAt: moment(data.beginAt).format('DD/MM/YYYY'),
-        endAt: moment(data.endAt).format('DD/MM/YYYY'),
+        beginAt: moment(data.beginAt).format('YYYY-MM-DDTHH:mm:ssZ'),
+        endAt: moment(data.endAt).format('YYYY-MM-DDTHH:mm:ssZ'),
       },
+    },
+    user.token
+  )
+}
+
+export const updateClassroom = async (id, classroom) => {
+  const user = await getItem('account')
+  return fetch(
+    {
+      method: 'put',
+      url: `discipline/${id}/classroom`,
+      data: {classroom}
     },
     user.token
   )

@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
   },
 })
 
-const MenuButtons = ({ menuSelected, onPress, role }) => {
+const MenuButtons = ({ menuSelected, onPress }) => {
   return (
     <View style={styles.container}>
       <MenuItem
@@ -31,23 +31,15 @@ const MenuButtons = ({ menuSelected, onPress, role }) => {
         onPress={() => onPress('alerts')}
       />
 
-      {role >= 2 && (
-        <MenuItem
-          color={Colors.gradientOrange}
-          label="Gerencial"
-          name="settings"
-          active={menuSelected === 'settings'}
-          onPress={() => onPress('settings')}
-        />
-      )}
 
       <MenuItem
-        color={Colors.gradientSuccess}
-        label="Perfil"
-        name="account"
-        active={menuSelected === 'profile'}
-        onPress={() => onPress('profile')}
+        color={Colors.gradientOrange}
+        label="Opções"
+        name="settings"
+        active={menuSelected === 'settings'}
+        onPress={() => onPress('settings')}
       />
+
     </View>
   )
 }

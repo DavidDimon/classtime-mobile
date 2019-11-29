@@ -1,7 +1,7 @@
 import React, { useCallback, useState, useEffect } from 'react'
 import { withNavigation, NavigationActions } from 'react-navigation'
 
-import { View, TouchableOpacity, Text } from 'react-native'
+import { View, TouchableOpacity, Text, TextInput } from 'react-native'
 import { Icon } from 'react-native-elements'
 import LinearGradient from 'react-native-linear-gradient'
 
@@ -11,12 +11,24 @@ import { getItem } from '@services/db'
 const styleTab = (tab, tabSelected) =>
   tab === tabSelected ? { borderBottomWidth: 5, borderColor: '#fff' } : {}
 
-const Header = ({ discipline, tabSelected, onChangeTab, navigation }) => {
+const Header = ({
+  discipline,
+  tabSelected,
+  onChangeTab,
+  navigation,
+  updateClassroom,
+}) => {
   const [user, setUser] = useState({})
+  const [isEdit, setIsEdit] = useState(false)
+  const [classroom, setClassroom] = useState(discipline.classroom)
   const loadUser = useCallback(async () => {
     const result = await getItem('account')
     setUser(result)
   }, [])
+
+  useEffect(() => {
+    setClassroom(discipline.classroom)
+  }, [discipline])
 
   useEffect(() => {
     loadUser()
@@ -52,18 +64,59 @@ const Header = ({ discipline, tabSelected, onChangeTab, navigation }) => {
         </TouchableOpacity>
       </View>
       <View style={styles.classroomView}>
-        <Text style={styles.classroomText}>{`Sala: ${
-          discipline.classroom
-        }`}</Text>
-        {user.role >= 1 && (
-          <TouchableOpacity>
-            <Icon
-              name="pencil"
-              type="material-community"
-              size={20}
-              color="#fff"
+        {isEdit ? (
+          <View style={{ flexDirection: 'row' }}>
+            <Text
+              style={[styles.classroomText, { marginRight: 5 }]}
+            >{`Sala:`}</Text>
+            <TextInput
+              value={classroom}
+              onChangeText={value => setClassroom(value)}
+              style={{
+                color: 'white',
+                fontSize: 18,
+                fontWeight: 'bold',
+                marginRight: 10,
+              }}
             />
-          </TouchableOpacity>
+          </View>
+        ) : (
+          <Text style={styles.classroomText}>{`Sala: ${classroom ||
+            discipline.classroom}`}</Text>
+        )}
+        {user.role >= 1 && (
+          <View style={{ flexDirection: 'row' }}>
+            {isEdit && (
+              <TouchableOpacity
+                style={{ marginRight: 5 }}
+                onPress={() => setIsEdit(false)}
+              >
+                <Icon
+                  name="close"
+                  type="material-community"
+                  size={20}
+                  color="#fff"
+                />
+              </TouchableOpacity>
+            )}
+            <TouchableOpacity
+              onPress={() => {
+                if(isEdit){
+                  updateClassroom(classroom)
+                  setIsEdit(false)
+                  return
+                }
+                setIsEdit(true)
+              }}
+            >
+              <Icon
+                name={isEdit ? 'check' : 'pencil'}
+                type="material-community"
+                size={20}
+                color="#fff"
+              />
+            </TouchableOpacity>
+          </View>
         )}
       </View>
 

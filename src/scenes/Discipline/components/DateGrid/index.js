@@ -17,7 +17,7 @@ const DateGrid = ({ beginAt, endAt, alerts, filter, onChange }) => {
   const [dates, setDates] = useState([])
 
   const loadOnMount = useCallback(() => {
-    const allDates = loadDates(moment(beginAt), moment(endAt), alerts)
+    const allDates = loadDates(beginAt, endAt, alerts)
     setDates(allDates)
   }, [beginAt, endAt])
 
@@ -38,6 +38,7 @@ const DateGrid = ({ beginAt, endAt, alerts, filter, onChange }) => {
           item={item}
           isSelected={item.date === filter}
           onChange={() => onChange(item.date)}
+          index={index}
         />
       )}
       horizontal

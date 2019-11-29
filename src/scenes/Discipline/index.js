@@ -4,6 +4,7 @@ import { withNavigation } from 'react-navigation'
 import { Content } from '@components'
 import { Colors } from '@styles'
 import { getGrid } from '@services/requests/grid'
+import { updateClassroom } from '@services/requests/disciplines'
 import { DateGrid, Alerts, Header, Users } from './components'
 
 import moment from 'moment'
@@ -44,6 +45,25 @@ const Discipline = ({ navigation }) => {
     setLoading(false)
   }, [])
 
+  const onUpdateClassroom = useCallback(
+    async classroom => {
+      setLoading(true)
+      const { data } = await updateClassroom(discipline.ID, classroom)
+      const updatedDiscipline = data.discipline
+      const res = await getGrid(updatedDiscipline.Grid.ID)
+      const alerts = parseAlerts(res.data.Alerts)
+      setFilter(Object.keys(alerts)[Object.keys(alerts).length - 1])
+      setDiscipline({
+        ...updatedDiscipline,
+        beginAt: moment(updatedDiscipline.beginAt),
+        endAt: moment(updatedDiscipline.endAt),
+        alerts: { ...alerts },
+      })
+      setLoading(false)
+    },
+    [discipline]
+  )
+
   useEffect(() => {
     const param = navigation.getParam('reset')
     if (param === undefined || param) {
@@ -57,6 +77,7 @@ const Discipline = ({ navigation }) => {
         discipline={discipline}
         tabSelected={tabSelected}
         onChangeTab={setTabSelected}
+        updateClassroom={onUpdateClassroom}
       />
 
       {tabSelected === 'alerts' && !loading && (

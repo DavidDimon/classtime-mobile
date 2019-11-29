@@ -14,13 +14,13 @@ export const loadDates = (minDate, maxDate, alerts) => {
   const length = maxDate.diff(minDate, 'week') + 1
   return length > 0 && minDate instanceof moment
     ? [...Array(length).keys()].map((item, index) => {
-        const date = index === 0 ? minDate : minDate.add(7, 'days')
+        const date = index === 0 ? minDate.utc() : minDate.utc().add(7, 'days')
         return {
           date: date.format('DD/MM/YYYY'),
-          day: daysOfWeek[date.day() - 1],
+          day: daysOfWeek[date.day() -1],
           countAlerts:
-            alerts && alerts[date.format('DD/MM/YYYY')]
-              ? alerts[date.format('DD/MM/YYYY')].length
+            alerts && alerts[date.utc().format('DD/MM/YYYY')]
+              ? alerts[date.utc().format('DD/MM/YYYY')].length
               : 0,
         }
       })

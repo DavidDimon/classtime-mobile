@@ -1,4 +1,5 @@
 import moment from 'moment'
+import momentTimezone from 'moment-timezone'
 import fetch from '@services/fetch'
 import { getItem } from '@services/db'
 
@@ -21,7 +22,17 @@ export const getGrid = async id => {
       },
       user.token
     )
-    return data
+    const result = {
+      ...data,
+      data: {
+        ...data.data,
+        Alerts: data.data.Alerts.map(item => {
+          const newDate = moment(item.date, 'YYYY-MM-DDTHH:mm:ssZ')
+          return { ...item, date: newDate.format('YYYY-MM-DDTHH:mm:ssZ') }
+        }),
+      },
+    }
+    return result
   } catch (error) {
     console.warn(error)
   }
@@ -46,7 +57,10 @@ export const getAlertsOfDay = async () => {
 
 export const addAlert = async (id, data) => {
   const user = await getItem('account')
-
+  console.log({
+    ...data,
+    date: moment(data.date).format('YYYY-MM-DDTHH:mm:ssZ'),
+  })
   return fetch(
     {
       method: 'post',

@@ -2,7 +2,6 @@ import React, { useRef, useState, useEffect } from 'react'
 import * as Animatable from 'react-native-animatable'
 import DisciplineList from '../DisciplineList'
 import AlertList from '../AlertList'
-import Profile from '../Profile'
 import Settings from '../Settings'
 import { styles } from './styles'
 
@@ -25,7 +24,6 @@ const MenuContent = ({ menuSelected }) => {
       {menu === 'classes' && <DisciplineList />}
       {menu === 'alerts' && <AlertList />}
       {menu === 'settings' && <Settings />}
-      {menu === 'profile' && <Profile />}
     </Animatable.View>
   )
 }

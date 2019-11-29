@@ -1,8 +1,17 @@
 import { StyleSheet } from 'react-native'
-import { Colors } from '@styles'
 
 export const styles = StyleSheet.create({
   content: {
+    flex: 1,
+    margin: 15,
+  },
+  value: {
+    fontWeight: 'normal',
+  },
+  label: {
+    fontWeight: 'bold',
+  },
+  menuContent: {
     flex: 1,
     flexDirection: 'row',
     flexWrap: 'wrap',

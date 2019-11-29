@@ -52,7 +52,7 @@ const AlertForm = ({ values, navigation, handleChange, ...props }) => {
 
   return (
     <Content notchColor={Colors.blue}>
-      <Header title="Criar novo alerta" />
+      <Header title="Editar alerta" />
       <ScrollView style={styles.content}>
         <DatePicker
           label="Data do alerta"
